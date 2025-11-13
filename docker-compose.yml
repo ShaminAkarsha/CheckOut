@@ -1,0 +1,105 @@
+version: "3.9"
+
+networks:
+  backend:
+
+services:
+  customerdb:
+    container_name: customer-db
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      SA_PASSWORD: "p@ssword12#"
+      ACCEPT_EULA: "Y"
+    networks:
+      - backend
+    ports:
+      - "8001:1433"
+
+  customerwebapi:
+    container_name: customer-api
+    image: ${DOCKER_REGISTRY-}customerwebapi
+    build:
+      context: .
+      dockerfile: CustomerWebAPI/Dockerfile
+    networks:
+      - backend
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - DB_HOST=customerdb
+      - DB_NAME=customer
+      - DB_SA_PASSWORD=p@ssword12#
+    # ports:
+    #   - "8002:8080"
+
+  productdb:
+    container_name: product-db
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      SA_PASSWORD: "p@ssword12#"
+      ACCEPT_EULA: "Y"
+    networks:
+      - backend
+    ports:
+      - "8003:1433"
+
+  productwebapi:
+    container_name: product-api
+    image: ${DOCKER_REGISTRY-}productwebapi
+    build:
+      context: .
+      dockerfile: ProductWebAPI/Dockerfile
+    networks:
+      - backend
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - DB_HOST=productdb
+      - DB_NAME=product
+      - DB_SA_PASSWORD=p@ssword12#
+    # ports:
+    #   - 8004:8080
+  
+  orderdb:
+    container_name: order-db
+    image: mongo
+    networks:
+       - backend
+    ports:
+     - 8005:27017
+
+  orderwebapi:
+    container_name: order-api
+    image: ${DOCKER_REGISTRY-}orderwebapi
+    build:
+      context: .
+      dockerfile: OrderWebAPI/Dockerfile
+    networks:
+      - backend
+    # ports:
+    #   - 8006:8080 
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - DB_HOST=orderdb
+      - DB_NAME=dms_order
+
+
+  apigateway:
+    container_name: api-gateway
+    image: ${DOCKER_REGISTRY-}apigateway
+    build:
+      context: .
+      dockerfile: ApiGateway/Dockerfile
+    ports:
+      - 8000:8080
+    networks:
+      - backend
+
+
+  authenticationwebapi:
+    container_name: authentication-api
+    image: ${DOCKER_REGISTRY-}authenticationwebapi
+    build:
+      context: .
+      dockerfile: AuthenticationWebApi/Dockerfile
+    networks:
+      - backend
+
