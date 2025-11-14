@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace ClothesWebApi.Models
 {
     [Table("Clothes", Schema = "dbo")]
-    public class Clothes
+    public class Clothe
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

@@ -1,13 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore.Infrastructure;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage;
-using Microsoft.EntityFrameworkCore;
-using SweetsWebApi.Models;
 
-namespace SweetsWebApi
+namespace ClothesWebApi
 {
-    public class SweetDBContext : DbContext
+    public class ClothDbContext : DbContext
     {
-        public SweetDBContext(DbContextOptions<SweetDBContext> dbContextOptions) : base(dbContextOptions)
+        public ClothDbContext(DbContextOptions<ClothDbContext> dbContextOptions) : base(dbContextOptions)
         {
             try
             {
@@ -24,6 +23,6 @@ namespace SweetsWebApi
                 Console.WriteLine($"Database error occured {ex.Message}");
             }
         }
-        public DbSet<Sweet> Sweets { get; set; }
+        public DbSet<Models.Clothe> Clothes { get; set; }
     }
 }
