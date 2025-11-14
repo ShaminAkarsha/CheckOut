@@ -22,10 +22,13 @@ namespace ProductWebAPI.Models
 
         [Column("product_description")]
         public string ProductDescription { get; set; }
+
         [Column("product_category")]
         public string ProductCategory { get; set; }
+
         [Column("product_cover_image")]
         public string? ProductCoverImage { get; set; }
+
         [Column("product_gallery_images")]
         public List<string> ProductGalleryImages { get; set; }
     }
