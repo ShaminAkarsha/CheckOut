@@ -7,7 +7,7 @@ using ProductWebAPI.Repositories;
 namespace ProductWebAPI.Controllers
 {
     [ApiController]
-    [Route("api/v1/product")]
+    [Route("api/product")]
     public class ProductController : ControllerBase
     {
         private readonly IProductRepository _repo;
@@ -26,10 +26,10 @@ namespace ProductWebAPI.Controllers
             return Ok(_mapper.Map<IEnumerable<ProductDto>>(products));
         }
 
-        [HttpGet("{id:int}")]
-        public async Task<ActionResult<ProductDto>> Get(int id)
+        [HttpGet("{productId:int}")]
+        public async Task<ActionResult<ProductDto>> Get(int productId)
         {
-            var product = await _repo.Get(id);
+            var product = await _repo.Get(productId);
             if (product == null) return NotFound();
 
             return Ok(_mapper.Map<ProductDto>(product));
@@ -70,10 +70,10 @@ namespace ProductWebAPI.Controllers
             return Ok("Bulk sync completed");
         }
 
-        [HttpDelete("{id:int}")]
-        public async Task<ActionResult> Remove(int id)
+        [HttpDelete("{productId:int}")]
+        public async Task<ActionResult> Remove(int productId)
         {
-            var product = await _repo.Get(id);
+            var product = await _repo.Get(productId);
             if (product == null) return NotFound();
 
             await _repo.Delete(product);

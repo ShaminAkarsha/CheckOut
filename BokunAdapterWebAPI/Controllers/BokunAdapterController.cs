@@ -1,4 +1,5 @@
-﻿using BokunAdapterWebAPI.Services;
+﻿using BokunAdapterWebAPI.Models;
+using BokunAdapterWebAPI.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,10 +17,10 @@ namespace BokunAdapterWebAPI.Controllers
         }
 
         [HttpPost("sync/bokun")]
-        public async Task<IActionResult> SyncBokun()
+        public async Task<ActionResult<List<ProductCreateDto>>> SyncBokun()
         {
-            await _service.SyncAsync();
-            return Ok("Bokun products synced.");
+            var addedProducts = await _service.SyncAsync();
+            return Ok(addedProducts);
         }
     }
 }

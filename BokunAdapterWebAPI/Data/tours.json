@@ -1,0 +1,32 @@
+[
+  {
+    "title": "Northern Lights Adventure",
+    "code": "NLA-001",
+    "price": 159.99,
+    "description": "Experience the magical aurora borealis on this unforgettable evening tour through Iceland's pristine wilderness."
+  },
+  {
+    "title": "Golden Circle Classic Tour",
+    "code": "GCC-002",
+    "price": 89.50,
+    "description": "Visit Iceland's most iconic natural wonders including Þingvellir National Park, Geysir geothermal area, and Gullfoss waterfall."
+  },
+  {
+    "title": "Glacier Hiking Expedition",
+    "code": "GHE-003",
+    "price": 225.00,
+    "description": "Trek across ancient ice formations with expert guides and discover the stunning blue ice caves of Vatnajökull glacier."
+  },
+  {
+    "title": "Whale Watching Safari",
+    "code": "WWS-004",
+    "price": 119.75,
+    "description": "Set sail from Reykjavik harbor to observe humpback whales, dolphins, and porpoises in their natural habitat."
+  },
+  {
+    "title": "Reykjavik City Walking Tour",
+    "code": "RCW-005",
+    "price": 45.00,
+    "description": "Explore the colorful streets of Iceland's capital with a local guide, including Hallgrímskirkja church and Harpa concert hall."
+  }
+]

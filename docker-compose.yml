@@ -114,3 +114,16 @@ services:
       - external
     ports:
       - "8015:1433"
+
+  bokunadapterwebapi:
+    container_name: bokun-adapter-api
+    image: ${DOCKER_REGISTRY-}bokunadapterwebapi
+    build:
+      context: .
+      dockerfile: BokunAdapterWebAPI/Dockerfile
+    ports:
+      - "8004:8080"
+    networks:
+      - backend
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development

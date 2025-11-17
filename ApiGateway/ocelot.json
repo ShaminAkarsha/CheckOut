@@ -46,17 +46,17 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "productwebapi",
-          "Port": 8080
+          "Port": 80800
         }
       ],
-      "DownstreamPathTemplate": "/api/product",
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
-      },
-      "RouteClaimsRequirement": {
-        "Role": "Admin"
-      }
+      "DownstreamPathTemplate": "/api/product"
+      //"AuthenticationOptions": {
+      //  "AuthenticationProviderKey": "Bearer",
+      //  "AllowedScopes": []
+      //},
+      //"RouteClaimsRequirement": {
+      //  "Role": "Admin"
+      //}
     },
     {
       "UpstreamPathTemplate": "/api/product/{productId}",
@@ -68,7 +68,7 @@
           "Port": 8080
         }
       ],
-      "DownstreamPathTemplate": "/api/produt/{productId}"
+      "DownstreamPathTemplate": "/api/product/{productId}"
     },
     // Order Web API
     {

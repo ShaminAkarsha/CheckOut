@@ -1,5 +1,6 @@
 ﻿using BokunAdapterWebAPI.HttpClients;
 using BokunAdapterWebAPI.Models;
+using System.Text.Json;
 
 namespace BokunAdapterWebAPI.Services
 {
@@ -14,24 +15,36 @@ namespace BokunAdapterWebAPI.Services
             _productApi = productApi;
         }
 
-        public async Task SyncAsync()
+        public async Task<List<BokunTour>> LoadFromJsonFile()
         {
-            var externalProducts = await _http.GetFromJsonAsync<List<BokunTour>>(
-                "https://api.bokun.com/products"
-            );
+            string path = Path.Combine(Directory.GetCurrentDirectory(), "Data/tours.json");
+            string json = await File.ReadAllTextAsync(path);
+            return JsonSerializer.Deserialize<List<BokunTour>>(json);
+        }
 
-            foreach (var p in externalProducts)
+        public async Task<List<ProductCreateDto>> SyncAsync()
+        {
+            var externalProducts = await LoadFromJsonFile();
+
+            //var externalProducts = await _http.GetFromJsonAsync<List<BokunTour>>(
+            //    "https://api.bokun.com/products"
+            //);
+
+            var bulkDtos = externalProducts.Select(p => new ProductCreateDto
             {
-                var dto = new ProductCreateDto
-                {
-                    ProductName = p.title,
-                    ProductCode = p.code,
-                    ProductPrice = p.price,
-                    ProductDescription = p.description
-                };
+                ExternalId = p.code,            // required
+                Source = "bokun",               // required
+                ProductName = p.title,
+                ProductCode = p.code,
+                ProductPrice = p.price,
+                ProductDescription = p.description,
+                ProductCategory = "Tours",      // required
+                ProductCoverImage = null,
+                ProductGalleryImages = new List<string>()
+            }).ToList();
 
-                await _productApi.CreateProductAsync(dto);
-            }
+            await _productApi.CreateProductsAsync(bulkDtos);
+            return bulkDtos;
         }
     }
 

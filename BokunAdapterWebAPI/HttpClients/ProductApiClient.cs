@@ -13,7 +13,14 @@ namespace BokunAdapterWebAPI.HttpClients
 
         public async Task<bool> CreateProductAsync(ProductCreateDto dto)
         {
-            var response = await _http.PostAsJsonAsync("/api/products", dto);
+            var response = await _http.PostAsJsonAsync("api/product", dto);
+            return response.IsSuccessStatusCode;
+        }
+
+        public async Task<bool> CreateProductsAsync(List<ProductCreateDto> dtos)
+        {
+            var response = await _http.PostAsJsonAsync("api/product/bulk", dtos);
+            Console.WriteLine(response);
             return response.IsSuccessStatusCode;
         }
     }

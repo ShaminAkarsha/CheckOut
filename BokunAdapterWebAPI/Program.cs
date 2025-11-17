@@ -4,15 +4,13 @@ using BokunAdapterWebAPI.Services;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
 // Add HttpClient for Product web API
 builder.Services.AddHttpClient<ProductApiClient>(client =>
 {
-    client.BaseAddress = new Uri("http://productwebapi");
+    client.BaseAddress = new Uri("http://productwebapi:8080");
 });
 
 // Add HttpClient for Bokun API
@@ -37,5 +35,7 @@ if (app.Environment.IsDevelopment())
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.MapGet("/", () => "This is Bokun Adapter root");
 
 app.Run();
