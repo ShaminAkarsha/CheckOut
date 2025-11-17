@@ -1,56 +1,83 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using ProductWebAPI.Dtos;
 using ProductWebAPI.Models;
+using ProductWebAPI.Repositories;
 
 namespace ProductWebAPI.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/v1/product")]
     public class ProductController : ControllerBase
     {
-        private readonly ProductDbContext _dbContext;
-        public ProductController(ProductDbContext productDbContext)
+        private readonly IProductRepository _repo;
+        private readonly IMapper _mapper;
+
+        public ProductController(IProductRepository repo, IMapper mapper)
         {
-            _dbContext = productDbContext;
+            _repo = repo;
+            _mapper = mapper;
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<Product>> GetAll()
+        public async Task<ActionResult<IEnumerable<ProductDto>>> GetAll()
         {
-            return _dbContext.Products;
+            var products = await _repo.GetAll();
+            return Ok(_mapper.Map<IEnumerable<ProductDto>>(products));
         }
 
-        [HttpGet("{productId:int}")]
-        public async Task<ActionResult<Product>> Get(int productId)
+        [HttpGet("{id:int}")]
+        public async Task<ActionResult<ProductDto>> Get(int id)
         {
-            var products = await _dbContext.Products.FindAsync(productId);
-            return Ok(products);
+            var product = await _repo.Get(id);
+            if (product == null) return NotFound();
+
+            return Ok(_mapper.Map<ProductDto>(product));
         }
 
         [HttpPost]
-        public async Task<ActionResult> Create(Product product)
+        public async Task<ActionResult> Create(ProductCreateDto dto)
         {
-            await _dbContext.Products.AddAsync(product);
-            await _dbContext.SaveChangesAsync();
-            return Ok("Product Added");
+            var product = _mapper.Map<Product>(dto);
+            product.SyncedAt = DateTime.UtcNow;
+
+            await _repo.Add(product);
+            return Ok("Product added");
         }
 
         [HttpPut]
-        public async Task<ActionResult> Update(Product product)
+        public async Task<ActionResult> Update(ProductUpdateDto dto)
         {
-            _dbContext.Products.Update(product);
-            await _dbContext.SaveChangesAsync();
-            return Ok("Product Updated");
+            var existing = await _repo.Get(dto.ProductId);
+            if (existing == null) return NotFound();
+
+            _mapper.Map(dto, existing);
+            await _repo.Update(existing);
+
+            return Ok("Product updated");
         }
 
-        [HttpDelete("{productId:int}")]
-        public async Task<ActionResult<Product>> Remove(int productId)
+        [HttpPost("bulk")]
+        public async Task<ActionResult> BulkSync(List<ProductSyncDto> dtos)
         {
-            var products = await _dbContext.Products.FindAsync(productId);
-            _dbContext.Products.Remove(products);
-            await _dbContext.SaveChangesAsync();
-            return Ok("Product Deleted");
+            var products = _mapper.Map<List<Product>>(dtos);
+
+            foreach (var p in products)
+                p.SyncedAt = DateTime.UtcNow;
+
+            await _repo.BulkUpsert(products);
+
+            return Ok("Bulk sync completed");
         }
 
+        [HttpDelete("{id:int}")]
+        public async Task<ActionResult> Remove(int id)
+        {
+            var product = await _repo.Get(id);
+            if (product == null) return NotFound();
+
+            await _repo.Delete(product);
+            return Ok("Product deleted");
+        }
     }
 }

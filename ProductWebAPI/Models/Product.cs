@@ -1,15 +1,22 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json;
 
 namespace ProductWebAPI.Models
 {
-    [Table("product", Schema="dbo")]
+    [Table("product", Schema = "dbo")]
     public class Product
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Column("product_id")]
         public int ProductId { get; set; }
+
+        [Column("external_id")]
+        public string ExternalId { get; set; }
+
+        [Column("source")]
+        public string Source { get; set; }
 
         [Column("product_name")]
         public string ProductName { get; set; }
@@ -30,6 +37,18 @@ namespace ProductWebAPI.Models
         public string? ProductCoverImage { get; set; }
 
         [Column("product_gallery_images")]
-        public List<string> ProductGalleryImages { get; set; }
+        public string ProductGalleryImagesJson { get; set; }
+
+        [NotMapped]
+        public List<string> ProductGalleryImages
+        {
+            get => string.IsNullOrEmpty(ProductGalleryImagesJson)
+                ? new()
+                : JsonSerializer.Deserialize<List<string>>(ProductGalleryImagesJson);
+            set => ProductGalleryImagesJson = JsonSerializer.Serialize(value);
+        }
+
+        [Column("synced_at")]
+        public DateTime SyncedAt { get; set; }
     }
 }
