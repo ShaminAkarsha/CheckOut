@@ -25,6 +25,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MockServices", "MockService
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Adapters", "Adapters", "{CD36B95F-164F-44BF-968E-39D94EDD2172}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BokunAdapterWebAPI", "BokunAdapterWebAPI\BokunAdapterWebAPI.csproj", "{C14CE390-1A38-4753-A23B-48A871E97ADE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +61,10 @@ Global
 		{DD075CEC-3445-42F6-8108-77E948DD0803}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DD075CEC-3445-42F6-8108-77E948DD0803}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DD075CEC-3445-42F6-8108-77E948DD0803}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C14CE390-1A38-4753-A23B-48A871E97ADE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C14CE390-1A38-4753-A23B-48A871E97ADE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C14CE390-1A38-4753-A23B-48A871E97ADE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C14CE390-1A38-4753-A23B-48A871E97ADE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -68,6 +74,7 @@ Global
 		{8921F8BE-EC44-06B3-FB20-58608F1DEFA7} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{57254D1D-217D-499C-A60D-2B690BEE453B} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{2F4177B7-89F8-44F3-B854-CF5A592F90A3} = {78761BD1-F1D8-47BE-B2AD-F01B49BBBB87}
+		{C14CE390-1A38-4753-A23B-48A871E97ADE} = {CD36B95F-164F-44BF-968E-39D94EDD2172}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0F36DA21-642A-4614-BDC5-9E1B101C7A9D}

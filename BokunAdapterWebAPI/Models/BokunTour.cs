@@ -1,0 +1,10 @@
+﻿namespace BokunAdapterWebAPI.Models
+{
+    public class BokunTour
+    {
+        public string title { get; set; }
+        public string code { get; set; }
+        public decimal price { get; set; }
+        public string description { get; set; }
+    }
+}
