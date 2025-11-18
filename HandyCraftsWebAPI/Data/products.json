@@ -1,0 +1,32 @@
+[
+  {
+    "name": "Handmade Wooden Elephant",
+    "code": "HC-1001",
+    "price": 3500.00,
+    "description": "A beautifully carved wooden elephant made by local artisans.",
+    "material": "Teak Wood",
+    "category": "Sculpture",
+    "size": "15cm x 10cm",
+    "color": "Natural Wood",
+    "coverImage": "https://mock.com/imgs/elephant_main.jpg",
+    "galleryImages": [
+      "https://mock.com/imgs/elephant_1.jpg",
+      "https://mock.com/imgs/elephant_2.jpg"
+    ]
+  },
+  {
+    "name": "Handcrafted Clay Pot",
+    "code": "HC-1002",
+    "price": 2200.00,
+    "description": "Traditional clay pot with hand-painted colorful designs.",
+    "material": "Clay",
+    "category": "Pottery",
+    "size": "Height 25cm",
+    "color": "Multicolor",
+    "coverImage": "https://mock.com/imgs/claypot_main.jpg",
+    "galleryImages": [
+      "https://mock.com/imgs/claypot_1.jpg",
+      "https://mock.com/imgs/claypot_2.jpg"
+    ]
+  }
+]

@@ -1,0 +1,6 @@
+@HandyCraftsWebAPI_HostAddress = http://localhost:5043
+
+GET {{HandyCraftsWebAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

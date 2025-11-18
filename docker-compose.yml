@@ -127,3 +127,17 @@ services:
       - backend
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+
+  handycraftsadapterwebapi:
+    container_name: handycrafts-adapter-api
+    image: ${DOCKER_REGISTRY-}handycraftsadapterwebapi
+    build:
+      context: .
+      dockerfile: HandyCraftsWebAPI/Dockerfile
+    ports:
+      - "8006:8080"
+    networks:
+      - backend
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+

@@ -46,7 +46,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "productwebapi",
-          "Port": 80800
+          "Port": 8080
         }
       ],
       "DownstreamPathTemplate": "/api/product"
