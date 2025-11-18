@@ -46,9 +46,12 @@ namespace ProductWebAPI.Repositories
                 if (existing == null)
                     _db.Products.Add(p);
                 else
-                    _db.Entry(existing).CurrentValues.SetValues(p);
-            }
+                {
+                    p.ProductId = existing.ProductId;
 
+                    _db.Entry(existing).CurrentValues.SetValues(p);
+                }
+            }
             await _db.SaveChangesAsync();
         }
     }
