@@ -46,17 +46,36 @@ namespace IntegrationService.Services
             return result;
         }
 
-        public async Task<ActionResult<bool>> AvailabilityOfProduct(string adapterName, string productId)
+        public async Task<ActionResult<AvailabilityResponseDto>> CheckAvailabilityAsync(string adapterName, AvailabilityRequestDto request)
         {
-            var adapter = await _repo.GetByNameAsync(adapterName);  // Changed to sync method
+            var adapter = await _repo.GetByNameAsync(adapterName);
 
             if (adapter == null || !adapter.IsActive)
             {
-               return new NotFoundResult();
+                return new NotFoundObjectResult(new AvailabilityResponseDto
+                {
+                    IsAvailable = false,
+                    Message = $"Adapter '{adapterName}' not found or inactive"
+                });
             }
 
-            var isAvailable = await _client.CheckAvailabilityAsync(adapter, productId);
-            return isAvailable;
+            var availability = await _client.CheckAvailabilityAsync(adapter, request);
+            return new OkObjectResult(availability);
+        }
+
+        // Keep the old method for backward compatibility (marked as obsolete)
+        [Obsolete("Use CheckAvailabilityAsync with AvailabilityRequestDto instead")]
+        public async Task<ActionResult<bool>> AvailabilityOfProduct(string adapterName, string productId)
+        {
+            var request = new AvailabilityRequestDto { ProductId = productId };
+            var result = await CheckAvailabilityAsync(adapterName, request);
+
+            if (result.Result is OkObjectResult okResult && okResult.Value is AvailabilityResponseDto response)
+            {
+                return response.IsAvailable;
+            }
+
+            return false;
         }
     }
 }

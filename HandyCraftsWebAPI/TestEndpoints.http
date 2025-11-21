@@ -1,0 +1,55 @@
+### HandyCrafts Adapter - Enhanced Availability and Payment Testing
+
+### 1. Check Product Availability (New POST method)
+POST https://localhost:7777/api/adapter/availability
+Content-Type: application/json
+
+{
+  "productId": "HC-1001",
+  "quantity": 2
+}
+
+### 2. Check Product Availability (Legacy GET method)
+GET https://localhost:7777/api/adapter/availability/HC-1001
+
+### 3. Process Payment with Quantity
+POST https://localhost:7777/api/adapter/payments/HC-1001
+Content-Type: application/json
+
+{
+  "quantity": 1,
+  "customerInfo": "John Doe - john@example.com"
+}
+
+### 4. Get Payment History
+GET https://localhost:7777/api/adapter/payments/history
+
+### 5. Get Current Product Inventory
+GET https://localhost:7777/api/adapter/products/inventory
+
+### 6. Check availability for low stock item
+POST https://localhost:7777/api/adapter/availability
+Content-Type: application/json
+
+{
+  "productId": "HC-1004",
+  "quantity": 1
+}
+
+### 7. Process payment for low stock item
+POST https://localhost:7777/api/adapter/payments/HC-1004
+Content-Type: application/json
+
+{
+  "quantity": 1,
+  "customerInfo": "Jane Smith - jane@example.com"
+}
+
+### 8. Try to buy more than available stock (should fail)
+POST https://localhost:7777/api/adapter/availability
+Content-Type: application/json
+
+{
+  "productId": "HC-1004",
+  "quantity": 5
+}

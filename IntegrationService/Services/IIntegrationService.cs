@@ -1,5 +1,4 @@
-﻿
-using IntegrationService.Models.DTOs;
+﻿using IntegrationService.Models.DTOs;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IntegrationService.Services
@@ -8,7 +7,6 @@ namespace IntegrationService.Services
     {
         Task<SyncResultDto> SyncAllAdaptersAsync();
         Task<SyncResultDto> SyncAdaptersAsync(string adapterName);
-        Task<ActionResult<bool>> AvailabilityOfProduct(string adapterName, string productId);
-
+        Task<ActionResult<AvailabilityResponseDto>> CheckAvailabilityAsync(string adapterName, AvailabilityRequestDto request);
     }
 }

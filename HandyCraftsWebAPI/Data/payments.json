@@ -1,0 +1,13 @@
+[
+  {
+    "paymentId": "sample-payment-001",
+    "productId": "HC-1001",
+    "productCode": "HC-1001",
+    "quantity": 1,
+    "unitPrice": 3500.00,
+    "totalAmount": 3500.00,
+    "paymentDate": "2024-01-20T10:30:00Z",
+    "paymentStatus": "Completed",
+    "customerInfo": "Sample Customer - John Doe"
+  }
+]
