@@ -26,21 +26,33 @@ namespace HandyCraftsAdapterWebAPI.Services
         {
             var externalProducts = await LoadFromJsonFile();
 
-            //var externalProducts = await _http.GetFromJsonAsync<List<BokunTour>>(
-            //    "https://api.bokun.com/products"
-            //);
-
             var bulkDtos = externalProducts.Select(p => new ProductCreateDto
             {
-                ExternalId = p.code,            // required
-                Source = "bokun",               // required
+                ExternalId = p.code,
+                Source = "handycrafts",               // Fixed: was "bokun"
                 ProductName = p.name,
                 ProductCode = p.code,
                 ProductPrice = p.price,
                 ProductDescription = p.description,
-                ProductCategory = "HandyCrafts",      // required
+                ProductCategory = "HandyCrafts",
                 ProductCoverImage = p.coverImage,
-                ProductGalleryImages = p.galleryImages
+                ProductGalleryImages = p.galleryImages,
+                ProductQuantity = p.stockQuantity,
+                AdditionalAttributes = new Dictionary<string, object>
+                {
+                    ["adapter_type"] = "handycrafts",
+                    ["material"] = p.material ?? "Unknown",
+                    ["size"] = p.size ?? "Unknown",
+                    ["color"] = p.color ?? "Unknown",
+                    ["weight"] = p.weight ?? "Unknown",
+                    ["dimensions"] = p.dimensions ?? "Unknown",
+                    ["artisan"] = p.artisan ?? "Unknown",
+                    ["origin"] = p.origin ?? "Unknown",
+                    ["is_handmade"] = p.isHandmade ?? true,
+                    ["crafting_technique"] = p.craftingTechnique ?? "Traditional",
+                    ["sync_timestamp"] = DateTime.UtcNow,
+                    ["product_category"] = p.category ?? "General"
+                }
             }).ToList();
 
             await _productApi.CreateProductsAsync(bulkDtos);

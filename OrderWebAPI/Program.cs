@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using OrderWebAPI;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -5,6 +8,15 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
+
+var dbHost = Environment.GetEnvironmentVariable("DB_HOST");
+var dbName = Environment.GetEnvironmentVariable("DB_NAME");
+var dbPassword = Environment.GetEnvironmentVariable("DB_SA_PASSWORD");
+//var dbUser = "sqluser";
+//var connectionString = "Server=CL-AKARSHAS\\SQLEXPRESS;Database=dms_customer;Trusted_Connection=True;TrustServerCertificate=True;";
+var connectionString = $"Data Source={dbHost};Initial Catalog={dbName};User ID=sa;Password={dbPassword};TrustServerCertificate=True;";
+builder.Services.AddDbContext<OrderDbContext>(opt => opt.UseSqlServer(connectionString)); // By default, AddDbContext registers your context as a scoped service.
+
 
 /* Swagger Services */
 builder.Services.AddEndpointsApiExplorer();

@@ -11,5 +11,9 @@
         public string ProductCategory { get; set; }
         public string? ProductCoverImage { get; set; }
         public List<string> ProductGalleryImages { get; set; }
+        public int? ProductQuantity { get; set; } = 0;
+
+        public Dictionary<string, object>? AdditionalAttributes { get; set; }
+
     }
 }

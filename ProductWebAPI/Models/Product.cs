@@ -33,6 +33,9 @@ namespace ProductWebAPI.Models
         [Column("product_category")]
         public string ProductCategory { get; set; }
 
+        [Column("product_quantity")]
+        public int? ProductQuantity { get; set; }
+
         [Column("product_cover_image")]
         public string? ProductCoverImage { get; set; }
 
@@ -46,6 +49,20 @@ namespace ProductWebAPI.Models
                 ? new()
                 : JsonSerializer.Deserialize<List<string>>(ProductGalleryImagesJson);
             set => ProductGalleryImagesJson = JsonSerializer.Serialize(value);
+        }
+
+        [Column("additional_attributes")]
+        public string? AdditionalAttributesJson { get; set; }
+
+        [NotMapped]
+        public Dictionary<string, object>? AdditionalAttributes
+        {
+            get => string.IsNullOrEmpty(AdditionalAttributesJson)
+                ? null
+                : JsonSerializer.Deserialize<Dictionary<string, object>>(AdditionalAttributesJson);
+            set => AdditionalAttributesJson = value == null
+                ? null
+                : JsonSerializer.Serialize(value);
         }
 
         [Column("synced_at")]

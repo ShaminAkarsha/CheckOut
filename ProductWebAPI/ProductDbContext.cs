@@ -25,6 +25,29 @@ namespace ProductWebAPI
             }
         }
 
-        public DbSet<Product> Products {  get; set; }
+        public DbSet<Product> Products { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Product>(entity =>
+            {
+                // Configure JSON columns
+                entity.Property(e => e.ProductGalleryImagesJson)
+                    .HasColumnType("nvarchar(max)");
+
+                entity.Property(e => e.AdditionalAttributesJson)
+                    .HasColumnType("nvarchar(max)")
+                    .IsRequired(false);
+
+                // Configure other properties if needed
+                entity.Property(e => e.ProductPrice)
+                    .HasColumnType("decimal(18,2)");
+
+                entity.Property(e => e.SyncedAt)
+                    .HasDefaultValueSql("GETUTCDATE()");
+            });
+        }
     }
 }

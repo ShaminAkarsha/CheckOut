@@ -40,7 +40,21 @@ namespace BokunAdapterWebAPI.Services
                 ProductDescription = p.description,
                 ProductCategory = "Tours",      // required
                 ProductCoverImage = null,
-                ProductGalleryImages = new List<string>()
+                ProductGalleryImages = new List<string>(),                
+                AdditionalAttributes = new Dictionary<string, object>
+                {
+                    ["adapter_type"] = "bokun",
+                    ["tour_duration"] = p.duration ?? "Unknown",
+                    ["tour_location"] = p.location ?? "Unknown",
+                    ["max_participants"] = p.maxParticipants ?? 0,
+                    ["difficulty_level"] = p.difficultyLevel ?? "Unknown",
+                    ["includes"] = p.includes ?? new List<string>(),
+                    ["excludes"] = p.excludes ?? new List<string>(),
+                    ["meeting_point"] = p.meetingPoint ?? "Unknown",
+                    ["cancellation_policy"] = p.cancellationPolicy ?? "Unknown",
+                    ["sync_timestamp"] = DateTime.UtcNow,
+                    ["external_url"] = p.externalUrl ?? string.Empty
+                }
             }).ToList();
 
             await _productApi.CreateProductsAsync(bulkDtos);
