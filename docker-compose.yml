@@ -2,6 +2,7 @@ version: "3.9"
 
 networks:
   backend:
+  external:
 
 services:
   customerdb:
@@ -60,11 +61,14 @@ services:
   
   orderdb:
     container_name: order-db
-    image: mongo
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      SA_PASSWORD: "p@ssword12#"
+      ACCEPT_EULA: "Y"
     networks:
-       - backend
+      - backend
     ports:
-     - 8005:27017
+      - "8005:1433"
 
   orderwebapi:
     container_name: order-api
@@ -79,8 +83,35 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - DB_HOST=orderdb
-      - DB_NAME=dms_order
+      - DB_NAME=order
+      - DB_SA_PASSWORD=p@ssword12#
 
+  cartdb:
+    container_name: cart-db
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      SA_PASSWORD: "p@ssword12#"
+      ACCEPT_EULA: "Y"
+    networks:
+      - backend
+    ports:
+      - "8011:1433"
+
+  cartwebapi:
+    container_name: cart-api
+    image: ${DOCKER_REGISTRY-}cartwebapi
+    build:
+      context: .
+      dockerfile: CartWebAPI/Dockerfile
+    networks:
+      - backend
+    ports:
+      - "8009:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - DB_HOST=cartdb
+      - DB_NAME=cart
+      - DB_SA_PASSWORD=p@ssword12#
 
   apigateway:
     container_name: api-gateway
@@ -102,4 +133,58 @@ services:
       dockerfile: AuthenticationWebApi/Dockerfile
     networks:
       - backend
+
+  bokunadapterwebapi:
+    container_name: bokun-adapter-api
+    image: ${DOCKER_REGISTRY-}bokunadapterwebapi
+    build:
+      context: .
+      dockerfile: BokunAdapterWebAPI/Dockerfile
+    ports:
+      - "8004:8080"
+    networks:
+      - backend
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+
+  handycraftsadapterwebapi:
+    container_name: handycrafts-adapter-api
+    image: ${DOCKER_REGISTRY-}handycraftsadapterwebapi
+    build:
+      context: .
+      dockerfile: HandyCraftsWebAPI/Dockerfile
+    ports:
+      - "8006:8080"
+    networks:
+      - backend
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+
+  adapterdb:
+    container_name: adapter-db
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      SA_PASSWORD: "p@ssword12#"
+      ACCEPT_EULA: "Y"
+    networks:
+      - backend
+    ports:
+    - "8015:1433"
+
+  integrationservice:
+    container_name: integration-service
+    image: ${DOCKER_REGISTRY-}integrationservice
+    build:
+      context: .
+      dockerfile: IntegrationService/Dockerfile
+    ports:
+      - "8016:8080"
+    networks:
+      - backend
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - DB_HOST=adapterdb
+      - DB_NAME=adapter
+      - DB_SA_PASSWORD=p@ssword12#
+
 

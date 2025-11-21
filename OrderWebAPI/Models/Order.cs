@@ -1,19 +1,37 @@
-﻿using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OrderWebAPI.Models
 {
-    [Serializable, BsonIgnoreExtraElements]
+    [Table("Order", Schema = "dbo")]
     public class Order
     {
-        [BsonId, BsonElement("_Id"), BsonRepresentation(BsonType.ObjectId)]
-        public string OrderId { get; set; }
-        [BsonElement("customer_id"), BsonRepresentation(BsonType.Int32)]
-        public int CustomerId { get; set; }
-        [BsonElement("ordered_on"), BsonRepresentation(BsonType.DateTime)]
-        public DateTime OrderedOn { get; set; }
-        [BsonElement("order_details")]
-        public List<OrderDetail> OrderDetails { get; set; }
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Column("order_id")]
+        public int OrderId { get; set; }
 
+        [Column("customer_id")]
+        public int CustomerId { get; set; }
+
+        [Column("status")]
+        // Pending, Confirmed, Failed, Cancelled, Expired, etc.
+        public string Status { get; set; } = "Pending";
+
+        [Column("total_amount")]
+        public decimal TotalAmount { get; set; }
+
+        [Column("currency")]
+        public string Currency { get; set; } = "USD";
+
+        [Column("created_at")]
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+
+        [Column("updated_at")]
+        public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
+
+        // Navigation
+        public List<OrderItem> Items { get; set; } = new();
+        public OrderPayment? Payment { get; set; }
     }
 }

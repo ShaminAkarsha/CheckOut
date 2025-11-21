@@ -1,0 +1,6 @@
+@BokunMockWebAPI_HostAddress = http://localhost:5194
+
+GET {{BokunMockWebAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
