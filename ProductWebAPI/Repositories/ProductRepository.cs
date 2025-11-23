@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using ProductWebAPI.Dtos;
+using ProductWebAPI.http;
 using ProductWebAPI.Models;
 
 namespace ProductWebAPI.Repositories
@@ -6,10 +8,12 @@ namespace ProductWebAPI.Repositories
     public class ProductRepository : IProductRepository
     {
         private readonly ProductDbContext _db;
+        private readonly IntegrationApiClient _http;
 
-        public ProductRepository(ProductDbContext db)
+        public ProductRepository(ProductDbContext db, IntegrationApiClient http)
         {
             _db = db;
+            _http = http;
         }
 
         public async Task<IEnumerable<Product>> GetAll() =>
@@ -53,6 +57,29 @@ namespace ProductWebAPI.Repositories
                 }
             }
             await _db.SaveChangesAsync();
+        }
+
+        public async Task<ProductAvailabilityResponseDto> GetAvailability(ProductAvailabilityRequestDto availabilityDto)
+        {
+            int id = int.Parse(availabilityDto.ProductId);
+            var product = await _db.Products.FindAsync(id);
+            var result = new ProductAvailabilityResponseDto();
+            if (product == null)
+            {
+                result.IsAvailable = false;
+                result.Message = "Product not found";
+                return result;
+            }
+            var request = new ProductAvailabilityRequestDto
+            {
+                ProductId = product.ExternalId,
+                CheckInDate = availabilityDto.CheckInDate,
+                CheckOutDate = availabilityDto.CheckOutDate,
+                NumberOfGuests = availabilityDto.NumberOfGuests > 0 ? availabilityDto.NumberOfGuests : 1,
+                Quantity = availabilityDto.Quantity
+            };
+            var availability = await _http.CheckAvailability(request, product.Source);   
+            return availability;
         }
     }
 }

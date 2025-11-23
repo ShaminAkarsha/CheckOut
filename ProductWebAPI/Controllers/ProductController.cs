@@ -70,6 +70,15 @@ namespace ProductWebAPI.Controllers
             return Ok("Bulk sync completed");
         }
 
+        [HttpPost("availability")]
+        public async Task<ActionResult> GetAvailability(ProductAvailabilityRequestDto availabilityDto)
+        {
+
+          ProductAvailabilityResponseDto result =  await _repo.GetAvailability(availabilityDto);
+
+            return Ok(result);
+        }
+
         [HttpDelete("{productId:int}")]
         public async Task<ActionResult> Remove(int productId)
         {

@@ -19,7 +19,7 @@ builder.Services.AddHttpClient<ProductApiClient>(client =>
     client.BaseAddress = new Uri("http://productwebapi:8080");
 });
 
-// Add HttpClient for Bokun API
+// Add HttpClient for handycraft API
 
 builder.Services.AddHttpClient<HandyCraftSyncService>();
 

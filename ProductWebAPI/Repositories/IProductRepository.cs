@@ -1,4 +1,5 @@
-﻿using ProductWebAPI.Models;
+﻿using ProductWebAPI.Dtos;
+using ProductWebAPI.Models;
 
 namespace ProductWebAPI.Repositories
 {
@@ -10,5 +11,6 @@ namespace ProductWebAPI.Repositories
         Task Update(Product product);
         Task Delete(Product product);
         Task BulkUpsert(List<Product> products);
+        Task<ProductAvailabilityResponseDto> GetAvailability(ProductAvailabilityRequestDto availabilityDto);
     }
 }

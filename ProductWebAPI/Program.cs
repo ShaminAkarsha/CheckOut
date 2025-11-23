@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using ProductWebAPI;
+using ProductWebAPI.http;
 using ProductWebAPI.Repositories;
 
 
@@ -27,6 +28,12 @@ var connectionString = $"Data Source={dbHost};Initial Catalog={dbName};User ID=s
 builder.Services.AddDbContext<ProductDbContext>(opt => opt.UseSqlServer(connectionString));
 
 /* ====================================== */
+
+// Add HttpClient for Product web API
+builder.Services.AddHttpClient<IntegrationApiClient>(client =>
+{
+    client.BaseAddress = new Uri("http://integrationservice:8080");
+});
 
 // Repository DI
 builder.Services.AddScoped<IProductRepository, ProductRepository>();

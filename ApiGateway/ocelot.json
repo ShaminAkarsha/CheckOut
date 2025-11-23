@@ -5,9 +5,9 @@
       "UpstreamPathTemplate": "/api/account",
       "UpstreamHttpMethod": [ "Post" ],
       "DownstreamScheme": "http",
-   "DownstreamHostAndPorts": [
+      "DownstreamHostAndPorts": [
         {
-    "Host": "authenticationwebapi",
+          "Host": "authenticationwebapi",
           "Port": 8080
         }
       ],
@@ -16,8 +16,8 @@
     // Customer Web API
     {
       "UpstreamPathTemplate": "/api/customer",
-  "UpstreamHttpMethod": [ "Get", "Post", "Put" ],
-   "DownstreamScheme": "http",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put" ],
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "customerwebapi",
@@ -32,22 +32,22 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-       "Host": "customerwebapi",
-        "Port": 8080
+          "Host": "customerwebapi",
+          "Port": 8080
         }
       ],
       "DownstreamPathTemplate": "/api/customer/{customerId}"
     },
-    
+
     // Cart Web API
     {
       "UpstreamPathTemplate": "/api/cart",
       "UpstreamHttpMethod": [ "Post" ],
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
-      {
-       "Host": "cartwebapi",
-        "Port": 8080
+        {
+          "Host": "cartwebapi",
+          "Port": 8080
         }
       ],
       "DownstreamPathTemplate": "/api/cart"
@@ -70,45 +70,45 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-    "Host": "cartwebapi",
+          "Host": "cartwebapi",
           "Port": 8080
         }
       ],
-   "DownstreamPathTemplate": "/api/cart/user/{userId}"
+      "DownstreamPathTemplate": "/api/cart/user/{userId}"
     },
     {
       "UpstreamPathTemplate": "/api/cart/user/{userId}/product/{productId}",
       "UpstreamHttpMethod": [ "Delete" ],
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
-    {
+        {
           "Host": "cartwebapi",
           "Port": 8080
-      }
+        }
       ],
       "DownstreamPathTemplate": "/api/cart/user/{userId}/product/{productId}"
     },
     {
       "UpstreamPathTemplate": "/api/cart/user/{userId}/clear",
-"UpstreamHttpMethod": [ "Delete" ],
+      "UpstreamHttpMethod": [ "Delete" ],
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
-  {
+        {
           "Host": "cartwebapi",
-        "Port": 8080
+          "Port": 8080
         }
       ],
       "DownstreamPathTemplate": "/api/cart/user/{userId}/clear"
     },
-  {
+    {
       "UpstreamPathTemplate": "/api/cart/user/{userId}/summary",
       "UpstreamHttpMethod": [ "Get" ],
- "DownstreamScheme": "http",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
-   {
+        {
           "Host": "cartwebapi",
           "Port": 8080
-     }
+        }
       ],
       "DownstreamPathTemplate": "/api/cart/user/{userId}/summary"
     },
@@ -117,16 +117,16 @@
     {
       "UpstreamPathTemplate": "/api/sync",
       "UpstreamHttpMethod": [ "Post" ],
-  "DownstreamScheme": "http",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "integrationservice",
-  "Port": 8080
-     }
+          "Port": 8080
+        }
       ],
       "DownstreamPathTemplate": "/api/sync"
     },
-{
+    {
       "UpstreamPathTemplate": "/api/sync/{adapterName}",
       "UpstreamHttpMethod": [ "Post" ],
       "DownstreamScheme": "http",
@@ -138,94 +138,106 @@
       ],
       "DownstreamPathTemplate": "/api/sync/{adapterName}"
     },
-  {
+    {
       "UpstreamPathTemplate": "/api/adapter",
-   "UpstreamHttpMethod": [ "Get", "Post" ],
+      "UpstreamHttpMethod": [ "Get", "Post" ],
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-"Host": "integrationservice",
-  "Port": 8080
+          "Host": "integrationservice",
+          "Port": 8080
         }
       ],
- "DownstreamPathTemplate": "/api/adapter"
+      "DownstreamPathTemplate": "/api/adapter"
     },
     {
       "UpstreamPathTemplate": "/api/adapter/{id}",
       "UpstreamHttpMethod": [ "Get", "Put", "Delete" ],
       "DownstreamScheme": "http",
-    "DownstreamHostAndPorts": [
+      "DownstreamHostAndPorts": [
         {
           "Host": "integrationservice",
           "Port": 8080
-      }
- ],
+        }
+      ],
       "DownstreamPathTemplate": "/api/adapter/{id}"
     },
     {
       "UpstreamPathTemplate": "/api/adapter/{id}/activate",
       "UpstreamHttpMethod": [ "Patch" ],
       "DownstreamScheme": "http",
-   "DownstreamHostAndPorts": [
+      "DownstreamHostAndPorts": [
         {
-       "Host": "integrationservice",
-     "Port": 8080
+          "Host": "integrationservice",
+          "Port": 8080
         }
-  ],
+      ],
       "DownstreamPathTemplate": "/api/adapter/{id}/activate"
     },
     {
       "UpstreamPathTemplate": "/api/adapter/{id}/deactivate",
       "UpstreamHttpMethod": [ "Patch" ],
-    "DownstreamScheme": "http",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
-     {
-      "Host": "integrationservice",
+        {
+          "Host": "integrationservice",
           "Port": 8080
         }
       ],
-    "DownstreamPathTemplate": "/api/adapter/{id}/deactivate"
+      "DownstreamPathTemplate": "/api/adapter/{id}/deactivate"
     },
 
-  // Product Web API
+    // Product Web API
     {
       "UpstreamPathTemplate": "/api/product",
       "UpstreamHttpMethod": [ "Get", "Post", "Put" ],
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
-     {
+        {
           "Host": "productwebapi",
-  "Port": 8080
-   }
+          "Port": 8080
+        }
       ],
       "DownstreamPathTemplate": "/api/product"
     },
     {
-"UpstreamPathTemplate": "/api/product/{productId}",
+      "UpstreamPathTemplate": "/api/product/{productId}",
       "UpstreamHttpMethod": [ "Get", "Delete" ],
- "DownstreamScheme": "http",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "productwebapi",
-        "Port": 8080
-    }
+          "Port": 8080
+        }
       ],
       "DownstreamPathTemplate": "/api/product/{productId}"
+    },
+    {
+      "UpstreamPathTemplate": "/api/product/availability",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "productwebapi",
+          "Port": 8080
+        }
+      ],
+      "DownstreamPathTemplate": "/api/product/availability"
     },
     // Order Web API
     {
       "UpstreamPathTemplate": "/api/order",
-   "UpstreamHttpMethod": [ "Get", "Post", "Put" ],
+      "UpstreamHttpMethod": [ "Get", "Post", "Put" ],
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "orderwebapi",
-    "Port": 8080
+          "Port": 8080
         }
       ],
-  "DownstreamPathTemplate": "/api/order",
+      "DownstreamPathTemplate": "/api/order",
       "RateLimitOptions": {
-      "ClientWhitelist": [],
+        "ClientWhitelist": [],
         "EnableRateLimiting": true,
         "Period": "60s",
         "PeriodTimespan": 60,
@@ -233,17 +245,17 @@
       }
     },
     {
- "UpstreamPathTemplate": "/api/order/{orderId}",
-  "UpstreamHttpMethod": [ "Get", "Delete" ],
+      "UpstreamPathTemplate": "/api/order/{orderId}",
+      "UpstreamHttpMethod": [ "Get", "Delete" ],
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
-    {
+        {
           "Host": "orderwebapi",
           "Port": 8080
         }
-  ],
+      ],
       "DownstreamPathTemplate": "/api/order/{orderId}"
-  }
+    }
   ],
   "GlobalConfiguration": {
   "BaseUrl": "http://localhost:8000",

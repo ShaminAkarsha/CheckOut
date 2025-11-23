@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using OrderWebAPI;
+using OrderWebAPI.http;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +18,11 @@ var dbPassword = Environment.GetEnvironmentVariable("DB_SA_PASSWORD");
 var connectionString = $"Data Source={dbHost};Initial Catalog={dbName};User ID=sa;Password={dbPassword};TrustServerCertificate=True;";
 builder.Services.AddDbContext<OrderDbContext>(opt => opt.UseSqlServer(connectionString)); // By default, AddDbContext registers your context as a scoped service.
 
+// Add HttpClient for Product web API
+builder.Services.AddHttpClient<ProductClientApi>(client =>
+{
+    client.BaseAddress = new Uri("http://productwebapi:8080");
+});
 
 /* Swagger Services */
 builder.Services.AddEndpointsApiExplorer();
