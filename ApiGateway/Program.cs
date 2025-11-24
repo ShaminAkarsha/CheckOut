@@ -27,6 +27,8 @@ var app = builder.Build();
 app.UseAuthentication();
 app.UseAuthorization();
 
+app.UseCors("AllowFrontend");
+
 await app.UseOcelot();
 
 
