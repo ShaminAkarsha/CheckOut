@@ -1,0 +1,48 @@
+### Order WebAPI Testing Endpoints
+
+### 1. Health Check
+GET https://localhost:7003/api/order/health
+
+### 2. Get All Orders for a User
+GET https://localhost:7003/api/order/1
+
+### 3. Get Specific Order Details
+GET https://localhost:7003/api/order/1/1001
+
+### 4. Create Order from Cart (Main functionality)
+POST https://localhost:7003/api/order
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "paymentMethod": "CreditCard",
+  "preferredDeliveryDate": "2024-02-15T00:00:00Z",
+  "notes": "Please deliver during business hours"
+}
+
+### 5. Cancel Order
+PUT https://localhost:7003/api/order/1/1001/cancel
+
+### 6. Update Order Status (Admin function)
+PUT https://localhost:7003/api/order/1001/status?status=Processing
+
+### 7. Update Order Status to Shipped
+PUT https://localhost:7003/api/order/1001/status?status=Shipped
+
+### 8. Update Order Status to Delivered
+PUT https://localhost:7003/api/order/1001/status?status=Delivered
+
+### 9. Test Invalid User ID
+GET https://localhost:7003/api/order/-1
+
+### 10. Test Invalid Order Creation (empty userId)
+POST https://localhost:7003/api/order
+Content-Type: application/json
+
+{
+  "userId": 0,
+  "notes": "This should fail"
+}
+
+### 11. Test Invalid Status Update
+PUT https://localhost:7003/api/order/1001/status?status=InvalidStatus

@@ -8,7 +8,7 @@ namespace OrderWebAPI.http
 
         public ProductClientApi(HttpClient http)
         {
-            _http = http;
+            _http = http; 
         }
 
         public async Task<ProductAvailabilityResponseDto> CheckAvailability(ProductAvailabilityRequestDto dto, string source)

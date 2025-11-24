@@ -29,7 +29,7 @@ namespace HandyCraftsAdapterWebAPI.Services
             var bulkDtos = externalProducts.Select(p => new ProductCreateDto
             {
                 ExternalId = p.code,
-                Source = "handycrafts",               // Fixed: was "bokun"
+                Source = "handycraft",               // Fixed: was "bokun"
                 ProductName = p.name,
                 ProductCode = p.code,
                 ProductPrice = p.price,

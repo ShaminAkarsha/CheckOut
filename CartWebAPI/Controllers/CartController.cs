@@ -205,7 +205,7 @@ namespace CartWebAPI.Controllers
         /// </summary>
    /// <param name="userId">User ID</param>
      /// <returns>No content if successful</returns>
-        [HttpDelete("user/{userId:int}/clear")]
+        [HttpDelete("{userId:int}/clear")]
       [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]

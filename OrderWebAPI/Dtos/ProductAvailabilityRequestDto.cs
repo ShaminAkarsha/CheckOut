@@ -5,7 +5,7 @@ namespace OrderWebAPI.Dtos
     public class ProductAvailabilityRequestDto
     {
         [Required]
-        public string ProductId { get; set; } = string.Empty;
+        public int ProductId { get; set; } = 0;
 
         /// <summary>
         /// Quantity for inventory-based products
