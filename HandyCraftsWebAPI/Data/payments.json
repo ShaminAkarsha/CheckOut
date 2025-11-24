@@ -1,7 +1,7 @@
 [
   {
     "paymentId": "sample-payment-001",
-    "productId": "HC-1001",
+    "ExternalId": "HC-1001",
     "productCode": "HC-1001",
     "quantity": 1,
     "unitPrice": 3500.00,

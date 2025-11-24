@@ -44,7 +44,7 @@ namespace BokunAdapterWebAPI.Controllers
         {
             try
             {
-                if (request == null || string.IsNullOrWhiteSpace(request.ProductId))
+                if (request == null || string.IsNullOrWhiteSpace(request.ExternalId))
                 {
                     return BadRequest(new AvailabilityResponseDto
                     {
@@ -53,7 +53,7 @@ namespace BokunAdapterWebAPI.Controllers
                     });
                 }
 
-                _logger.LogInformation("Checking availability for Bokun tour {ProductId}", request.ProductId);
+                _logger.LogInformation("Checking availability for Bokun tour {ExternalId}", request.ExternalId);
 
                 // Mock Bokun availability logic - replace with actual Bokun API calls
                 // For tours, we typically need check-in date and number of guests
@@ -62,7 +62,7 @@ namespace BokunAdapterWebAPI.Controllers
                 var isValidGuestCount = !request.NumberOfGuests.HasValue || request.NumberOfGuests.Value > 0;
 
                 bool isAvailable = hasRequiredBookingInfo && isWithinValidDateRange && isValidGuestCount;
-                decimal? pricePerPerson = isAvailable ? GetMockTourPrice(request.ProductId, request.CheckInDate) : null;
+                decimal? pricePerPerson = isAvailable ? GetMockTourPrice(request.ExternalId, request.CheckInDate) : null;
 
                 await Task.Delay(100); // Simulate API call delay
 
@@ -77,7 +77,7 @@ namespace BokunAdapterWebAPI.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error checking availability for product {ProductId}", request?.ProductId);
+                _logger.LogError(ex, "Error checking availability for product {ExternalId}", request?.ExternalId);
                 return StatusCode(500, new AvailabilityResponseDto
                 {
                     IsAvailable = false,
@@ -89,16 +89,16 @@ namespace BokunAdapterWebAPI.Controllers
         /// <summary>
         /// Legacy GET endpoint for backward compatibility
         /// </summary>
-        [HttpGet("availability/{productId}")]
+        [HttpGet("availability/{ExternalId}")]
         [Obsolete("Use POST /availability with AvailabilityRequestDto for enhanced functionality")]
-        public async Task<ActionResult<bool>> CheckAvailabilityLegacy(string productId)
+        public async Task<ActionResult<bool>> CheckAvailabilityLegacy(string ExternalId)
         {
             try
             {
                 // Convert to new format and call the enhanced method
                 var request = new AvailabilityRequestDto
                 {
-                    ProductId = productId,
+                    ExternalId = ExternalId,
                     CheckInDate = DateTime.Today.AddDays(1),
                     NumberOfGuests = 2
                 };
@@ -113,24 +113,24 @@ namespace BokunAdapterWebAPI.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error checking availability for product {ProductId}", productId);
+                _logger.LogError(ex, "Error checking availability for product {ExternalId}", ExternalId);
                 return StatusCode(500, false);
             }
         }
 
-        [HttpPost("payments/{productId}")]
-        public async Task<ActionResult<bool>> ProcessPayment(string productId)
+        [HttpPost("payments/{ExternalId}")]
+        public async Task<ActionResult<bool>> ProcessPayment(string ExternalId)
         {
             try
             {
                 // Mock payment processing - replace with actual logic
-                var paymentSuccess = !string.IsNullOrEmpty(productId);
+                var paymentSuccess = !string.IsNullOrEmpty(ExternalId);
                 await Task.Delay(100); // Simulate async work
                 return Ok(paymentSuccess);
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error processing payment for product {ProductId}", productId);
+                _logger.LogError(ex, "Error processing payment for product {ExternalId}", ExternalId);
                 return StatusCode(500, false);
             }
         }
@@ -138,7 +138,7 @@ namespace BokunAdapterWebAPI.Controllers
         /// <summary>
         /// Mock method to get tour pricing based on product and date
         /// </summary>
-        private decimal GetMockTourPrice(string productId, DateTime? checkInDate)
+        private decimal GetMockTourPrice(string ExternalId, DateTime? checkInDate)
         {
             // Mock pricing logic - replace with actual Bokun API pricing calls
             var basePrice = 150m; // Base tour price

@@ -65,9 +65,9 @@ namespace IntegrationService.Services
 
         // Keep the old method for backward compatibility (marked as obsolete)
         [Obsolete("Use CheckAvailabilityAsync with AvailabilityRequestDto instead")]
-        public async Task<ActionResult<bool>> AvailabilityOfProduct(string adapterName, string productId)
+        public async Task<ActionResult<bool>> AvailabilityOfProduct(string adapterName, string ExternalId)
         {
-            var request = new AvailabilityRequestDto { ProductId = productId };
+            var request = new AvailabilityRequestDto { ExternalId = ExternalId };
             var result = await CheckAvailabilityAsync(adapterName, request);
 
             if (result.Result is OkObjectResult okResult && okResult.Value is AvailabilityResponseDto response)

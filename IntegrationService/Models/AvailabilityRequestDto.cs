@@ -5,7 +5,7 @@ namespace IntegrationService.Models.DTOs
     public class AvailabilityRequestDto
     {
         [Required]
-        public string ProductId { get; set; } = string.Empty;
+        public string ExternalId { get; set; } = string.Empty;
 
         /// <summary>
         /// Quantity for inventory-based products

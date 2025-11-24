@@ -41,7 +41,7 @@ namespace HandyCraftsAdapterWebAPI.Controllers
         {
             try
             {
-                if (request == null || string.IsNullOrWhiteSpace(request.ProductId))
+                if (request == null || string.IsNullOrWhiteSpace(request.ExternalId))
                 {
                     return BadRequest(new AvailabilityResponseDto
                     {
@@ -50,12 +50,12 @@ namespace HandyCraftsAdapterWebAPI.Controllers
                     });
                 }
 
-                _logger.LogInformation("Checking availability for HandyCraft product {ProductId}", request.ProductId);
+                _logger.LogInformation("Checking availability for HandyCraft product {ExternalId}", request.ExternalId);
                 
                 // Load products from JSON file
                 var products = await LoadProductsFromJsonAsync();
                 var product = products.FirstOrDefault(p => 
-                          p.code.Equals(request.ProductId, StringComparison.OrdinalIgnoreCase) && 
+                          p.code.Equals(request.ExternalId, StringComparison.OrdinalIgnoreCase) && 
                      p.isActive);
 
                 if (product == null)
@@ -63,7 +63,7 @@ namespace HandyCraftsAdapterWebAPI.Controllers
                     return Ok(new AvailabilityResponseDto
                     {
                         IsAvailable = false,
-                        Message = $"Product '{request.ProductId}' not found or inactive"
+                        Message = $"Product '{request.ExternalId}' not found or inactive"
                     });
                 }
 
@@ -87,7 +87,7 @@ namespace HandyCraftsAdapterWebAPI.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error checking availability for product {ProductId}", request?.ProductId);
+                _logger.LogError(ex, "Error checking availability for product {ExternalId}", request?.ExternalId);
                 return StatusCode(500, new AvailabilityResponseDto
                 {
                     IsAvailable = false,
@@ -99,16 +99,16 @@ namespace HandyCraftsAdapterWebAPI.Controllers
         /// <summary>
         /// Legacy GET endpoint for backward compatibility
         /// </summary>
-        [HttpGet("availability/{productId}")]
+        [HttpGet("availability/{ExternalId}")]
         [Obsolete("Use POST /availability with AvailabilityRequestDto for enhanced functionality")]
-        public async Task<ActionResult<bool>> CheckAvailability(string productId)
+        public async Task<ActionResult<bool>> CheckAvailability(string ExternalId)
         {
             try
             {
                 // Convert to new format and call the enhanced method
                 var request = new AvailabilityRequestDto 
-                { 
-                    ProductId = productId,
+                {
+                    ExternalId = ExternalId,
                     Quantity = 1
                 };
                 
@@ -122,7 +122,7 @@ namespace HandyCraftsAdapterWebAPI.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error checking availability for product {ProductId}", productId);
+                _logger.LogError(ex, "Error checking availability for product {ExternalId}", ExternalId);
                 return StatusCode(500, false);
             }
         }
@@ -130,22 +130,22 @@ namespace HandyCraftsAdapterWebAPI.Controllers
         /// <summary>
         /// Process payment for HandyCrafts products with JSON file tracking and inventory update
         /// </summary>
-        [HttpPost("payments/{productId}")]
-        public async Task<ActionResult<bool>> ProcessPayment(string productId, [FromBody] PaymentProcessRequest? paymentRequest = null)
+        [HttpPost("payments/{ExternalId}")]
+        public async Task<ActionResult<bool>> ProcessPayment(string ExternalId, [FromBody] PaymentProcessRequest? paymentRequest = null)
         {
             try
             {
-                _logger.LogInformation("Processing payment for product {ProductId}", productId);
+                _logger.LogInformation("Processing payment for product {ExternalId}", ExternalId);
 
                 // Load current products to get pricing and validate stock
                 var products = await LoadProductsFromJsonAsync();
                 var product = products.FirstOrDefault(p => 
-                p.code.Equals(productId, StringComparison.OrdinalIgnoreCase) && 
+                p.code.Equals(ExternalId, StringComparison.OrdinalIgnoreCase) && 
             p.isActive);
 
                 if (product == null)
                 {
-                    _logger.LogWarning("Product {ProductId} not found for payment processing", productId);
+                    _logger.LogWarning("Product {ExternalId} not found for payment processing", ExternalId);
                     return Ok(false);
                 }
 
@@ -154,8 +154,8 @@ namespace HandyCraftsAdapterWebAPI.Controllers
 
                 if (availableStock < quantity)
                 {
-                    _logger.LogWarning("Insufficient stock for product {ProductId}. Available: {Available}, Requested: {Requested}", 
-                productId, availableStock, quantity);
+                    _logger.LogWarning("Insufficient stock for product {ExternalId}. Available: {Available}, Requested: {Requested}",
+                ExternalId, availableStock, quantity);
                     return Ok(false);
                 }
 
@@ -168,7 +168,7 @@ namespace HandyCraftsAdapterWebAPI.Controllers
                 var paymentRecord = new PaymentRecord
                 {
                     PaymentId = paymentId,
-                    ProductId = productId,
+                    ExternalId = ExternalId,
                     ProductCode = product.code,
                     Quantity = quantity,
                     UnitPrice = unitPrice,
@@ -186,14 +186,14 @@ namespace HandyCraftsAdapterWebAPI.Controllers
                 product.lastUpdated = DateTime.UtcNow;
                 await UpdateProductsJsonAsync(products);
 
-                _logger.LogInformation("Payment processed successfully. PaymentId: {PaymentId}, Product: {ProductId}, Quantity: {Quantity}, Total: {Total}", 
-                paymentId, productId, quantity, totalAmount);
+                _logger.LogInformation("Payment processed successfully. PaymentId: {PaymentId}, Product: {ExternalId}, Quantity: {Quantity}, Total: {Total}", 
+                paymentId, ExternalId, quantity, totalAmount);
 
                 return Ok(true);
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error processing payment for product {ProductId}", productId);
+                _logger.LogError(ex, "Error processing payment for product {ExternalId}", ExternalId);
                 return StatusCode(500, false);
             }
         }
@@ -234,7 +234,7 @@ namespace HandyCraftsAdapterWebAPI.Controllers
                 var products = await LoadProductsFromJsonAsync();
                 var inventory = products.Where(p => p.isActive)
                     .Select(p => new {
-                        productId = p.code,
+                        ExternalId = p.code,
                         name = p.name,
                         price = p.price,
                         stockQuantity = p.stockQuantity,

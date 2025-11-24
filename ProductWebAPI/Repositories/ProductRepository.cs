@@ -61,7 +61,7 @@ namespace ProductWebAPI.Repositories
 
         public async Task<ProductAvailabilityResponseDto> GetAvailability(ProductAvailabilityRequestDto availabilityDto)
         {
-            int id = int.Parse(availabilityDto.ProductId);
+            int id = availabilityDto.ProductId;
             var product = await _db.Products.FindAsync(id);
             var result = new ProductAvailabilityResponseDto();
             if (product == null)
@@ -72,7 +72,7 @@ namespace ProductWebAPI.Repositories
             }
             var request = new ProductAvailabilityRequestDto
             {
-                ProductId = product.ExternalId,
+                ExternalId = product.ExternalId,
                 CheckInDate = availabilityDto.CheckInDate,
                 CheckOutDate = availabilityDto.CheckOutDate,
                 NumberOfGuests = availabilityDto.NumberOfGuests > 0 ? availabilityDto.NumberOfGuests : 1,

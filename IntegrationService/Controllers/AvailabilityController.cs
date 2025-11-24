@@ -36,7 +36,7 @@ namespace IntegrationService.Controllers
       });
      }
 
-          if (request == null || string.IsNullOrWhiteSpace(request.ProductId))
+          if (request == null || string.IsNullOrWhiteSpace(request.ExternalId))
        {
    return BadRequest(new AvailabilityResponseDto
      {
@@ -57,9 +57,9 @@ namespace IntegrationService.Controllers
         /// <returns>Simple boolean availability status</returns>
         [HttpGet("{adapterName}/{productId}")]
         [Obsolete("Use POST method with AvailabilityRequestDto for enhanced functionality")]
-        public async Task<ActionResult<bool>> CheckAvailabilityLegacy(string adapterName, string productId)
+        public async Task<ActionResult<bool>> CheckAvailabilityLegacy(string adapterName, string ExternalId)
         {
-            var request = new AvailabilityRequestDto { ProductId = productId };
+            var request = new AvailabilityRequestDto { ExternalId = ExternalId };
     var result = await _client.CheckAvailabilityAsync(adapterName, request);
 
 if (result.Result is OkObjectResult okResult && okResult.Value is AvailabilityResponseDto response)

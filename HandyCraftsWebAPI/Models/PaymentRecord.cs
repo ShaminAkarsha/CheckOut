@@ -3,7 +3,7 @@ namespace HandyCraftsAdapterWebAPI.Models
  public class PaymentRecord
     {
   public string PaymentId { get; set; } = string.Empty;
-  public string ProductId { get; set; } = string.Empty;
+  public string ExternalId { get; set; } = string.Empty;
  public string ProductCode { get; set; } = string.Empty;
  public int Quantity { get; set; }
   public decimal UnitPrice { get; set; }
