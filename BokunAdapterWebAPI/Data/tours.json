@@ -1,32 +1,189 @@
 [
   {
-    "title": "Northern Lights Adventure",
-    "code": "NLA-001",
-    "price": 159.99,
-    "description": "Experience the magical aurora borealis on this unforgettable evening tour through Iceland's pristine wilderness."
-  },
-  {
-    "title": "Golden Circle Classic Tour",
-    "code": "GCC-002",
-    "price": 89.50,
-    "description": "Visit Iceland's most iconic natural wonders including Þingvellir National Park, Geysir geothermal area, and Gullfoss waterfall."
-  },
-  {
-    "title": "Glacier Hiking Expedition",
-    "code": "GHE-003",
-    "price": 225.00,
-    "description": "Trek across ancient ice formations with expert guides and discover the stunning blue ice caves of Vatnajökull glacier."
-  },
-  {
-    "title": "Whale Watching Safari",
-    "code": "WWS-004",
-    "price": 119.75,
-    "description": "Set sail from Reykjavik harbor to observe humpback whales, dolphins, and porpoises in their natural habitat."
-  },
-  {
-    "title": "Reykjavik City Walking Tour",
-    "code": "RCW-005",
+    "title": "Sigiriya Rock Fortress Climb",
+    "code": "SLT-001",
     "price": 45.00,
-    "description": "Explore the colorful streets of Iceland's capital with a local guide, including Hallgrímskirkja church and Harpa concert hall."
+    "description": "Climb the legendary Sigiriya Rock Fortress and explore ancient frescoes, water gardens and royal ruins.",
+    "coverImage": "https://d18slle4wlf9ku.cloudfront.net/www.cinnamonhotels.com-1302818674/cms/cache/v2/66aa1f8da6100.jpg/1920x1080/resize/80/e525be413eb177b415bed039074b68e1.jpg",
+    "galleryImages": [
+      "https://chasinggambozinos.com/wp-content/uploads/climb-sigiriya-rock.jpg",
+      "https://www.ottsworld.com/wp-content/uploads/2011/05/sigirya-8-900x600.jpg",
+      "https://as1.ftcdn.net/jpg/02/28/97/10/1000_F_228971006_uwKXgACSa5dyaI8aWL1YfO7e1jPQ9mvu.jpg",
+      "https://reddot-assets.s3.ap-southeast-1.amazonaws.com/2875/1500.jpg"
+    ],
+    "duration": "4 Hours",
+    "location": "Sigiriya, Central Province",
+    "maxParticipants": 10,
+    "difficultyLevel": "Moderate",
+    "includes": [ "Entrance ticket", "Local guide", "Bottled water" ],
+    "excludes": [ "Transport", "Personal expenses" ],
+    "meetingPoint": "Sigiriya Main Entrance",
+    "cancellationPolicy": "Free cancellation up to 24 hours before start.",
+    "externalUrl": "https://example.com/tours/sigiriya",
+    "isActive": true,
+    "createdAt": "2025-01-01T05:30:00Z",
+    "updatedAt": "2025-01-10T08:10:00Z"
+  },
+  {
+    "title": "Ella Nine Arches Bridge & Tea Walk",
+    "code": "SLT-002",
+    "price": 35.00,
+    "description": "Walk through tea estates and visit the famous Nine Arches Bridge in Ella.",
+    "coverImage": "https://www.travelmapsrilanka.com/destinations/destinationimages/nine-arch-bridge-in-ella.webp",
+    "galleryImages": [
+      "https://cdn.getyourguide.com/image/format=auto,fit=crop,gravity=auto,quality=60,width=450,height=450,dpr=2/tour_img/95d65277792fa352ae62a2693768faf988ce5662dc70e7db4d6c6beb211d7b5b.jpg",
+      "https://srilankatravelpages.com/my_content/uploads/2024/03/Nine-Arch-Bridge-Ella-%E2%80%93-Sri-Lanka-.jpg",
+      "https://www.travelmapsrilanka.com/destinations/destinationimages/travel-nine-arch-bridge.webp"
+    ],
+    "duration": "3 Hours",
+    "location": "Ella, Uva Province",
+    "maxParticipants": 12,
+    "difficultyLevel": "Easy",
+    "includes": [ "Tea plantation walkthrough", "Guide" ],
+    "excludes": [ "Transport", "Food" ],
+    "meetingPoint": "Ella Railway Station",
+    "cancellationPolicy": "Non-refundable once booked.",
+    "externalUrl": "https://example.com/tours/ella",
+    "isActive": true,
+    "createdAt": "2025-01-02T06:00:00Z",
+    "updatedAt": "2025-01-11T09:00:00Z"
+  },
+  {
+    "title": "Yala National Park Leopard Safari",
+    "code": "SLT-003",
+    "price": 90.00,
+    "description": "Jeep safari through Yala National Park, home to Sri Lanka’s highest leopard density.",
+    "coverImage": "https://www.wnpssl.org/images/site-specific/news/image_sliders/people-and-leopards/people-and-leopards-4.jpg",
+    "galleryImages": [
+      "https://media-cdn.tripadvisor.com/media/attractions-splice-spp-674x446/06/74/b6/41.jpg",
+      "https://media-cdn.tripadvisor.com/media/attractions-splice-spp-674x446/09/f2/0f/25.jpg"
+    ],
+    "duration": "5 Hours",
+    "location": "Yala, Southern Province",
+    "maxParticipants": 6,
+    "difficultyLevel": "Easy",
+    "includes": [ "Safari jeep", "Park entrance ticket", "Driver guide" ],
+    "excludes": [ "Meals", "Gratuities" ],
+    "meetingPoint": "Yala National Park Gate",
+    "cancellationPolicy": "50% refund if cancelled within 24 hours.",
+    "externalUrl": "https://example.com/tours/yala",
+    "isActive": true,
+    "createdAt": "2025-01-03T04:30:00Z",
+    "updatedAt": "2025-01-12T07:20:00Z"
+  },
+  {
+    "title": "Galle Fort Heritage Walk",
+    "code": "SLT-004",
+    "price": 25.00,
+    "description": "Explore Dutch colonial architecture, streets, museums and coastal views inside Galle Fort.",
+    "coverImage": "https://media-cdn.tripadvisor.com/media/attractions-splice-spp-720x480/15/7b/6f/17.jpg",
+    "galleryImages": [
+      "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/10/b2/31/e1/photo5jpg.jpg?w=1200&h=-1&s=1",
+      "https://evendo.com/public/assets/vendor-images/001/d6/9b/d69bdb29f733157f05912b95a5fd6ec979b02a71.jpeg"
+    ],
+    "duration": "2.5 Hours",
+    "location": "Galle, Southern Province",
+    "maxParticipants": 15,
+    "difficultyLevel": "Easy",
+    "includes": [ "Local historian guide", "Map" ],
+    "excludes": [ "Museum fees", "Snacks" ],
+    "meetingPoint": "Galle Fort Clock Tower",
+    "cancellationPolicy": "Full refund if cancelled 12 hours before.",
+    "externalUrl": "https://example.com/tours/galle",
+    "isActive": true,
+    "createdAt": "2025-01-04T07:00:00Z",
+    "updatedAt": "2025-01-13T10:10:00Z"
+  },
+  {
+    "title": "Kandy Temple of the Tooth Visit",
+    "code": "SLT-005",
+    "price": 30.00,
+    "description": "Visit the sacred Temple of the Tooth and witness traditional Kandyan architecture.",
+    "coverImage": "https://media.tacdn.com/media/attractions-splice-spp-674x446/06/6b/7c/6c.jpg",
+    "galleryImages": [
+      "https://www.ceylonexpeditions.com/medias/destination_places/big/106/temple-of-the-sacred-tooth-relic-kandy.jpg",
+      "https://www.yogawinetravel.com/wp-content/uploads/2018/08/Temple-of-the-Tooth-in-Kandy-2-750x500.jpg"
+    ],
+    "duration": "2 Hours",
+    "location": "Kandy, Central Province",
+    "maxParticipants": 20,
+    "difficultyLevel": "Easy",
+    "includes": [ "Temple entrance", "Local guide" ],
+    "excludes": [ "Photography inside temple" ],
+    "meetingPoint": "Temple Main Entrance",
+    "cancellationPolicy": "Free cancellation up to 24 hours before tour.",
+    "externalUrl": "https://example.com/tours/kandy",
+    "isActive": true,
+    "createdAt": "2025-01-05T08:30:00Z",
+    "updatedAt": "2025-01-14T11:00:00Z"
+  },
+  {
+    "title": "Mirissa Whale Watching Cruise",
+    "code": "SLT-006",
+    "price": 95.00,
+    "description": "Early morning whale and dolphin watching cruise in the Indian Ocean.",
+    "coverImage": "https://mirissacabs.com/wp-content/uploads/2021/11/whale-watching-1024x683.jpg",
+    "galleryImages": [
+      "https://whalewatchingclub.com/assets/img/Whale-Watching-Club-1.webp",
+      "https://media-cdn.tripadvisor.com/media/attractions-splice-spp-674x446/07/36/82/b9.jpg"
+    ],
+    "duration": "6 Hours",
+    "location": "Mirissa, Southern Province",
+    "maxParticipants": 25,
+    "difficultyLevel": "Easy",
+    "includes": [ "Boat cruise", "Breakfast", "Life jackets" ],
+    "excludes": [ "Transport", "Sea sickness medication" ],
+    "meetingPoint": "Mirissa Harbor",
+    "cancellationPolicy": "No refund if cancelled within 48 hours.",
+    "externalUrl": "https://example.com/tours/mirissa",
+    "isActive": true,
+    "createdAt": "2025-01-06T03:45:00Z",
+    "updatedAt": "2025-01-15T06:20:00Z"
+  },
+  {
+    "title": "Nuwara Eliya Tea Plantation Tour",
+    "code": "SLT-007",
+    "price": 40.00,
+    "description": "Explore tea plantations and factories in Sri Lanka’s tea capital with tasting sessions.",
+    "coverImage": "https://img.freepik.com/premium-photo/nuwara-eliya-tea-plantation-sri-lanka-nuwara-eliya-is-most-important-place-tea-plantation-production-sri-lanka_78361-9432.jpg",
+    "galleryImages": [
+      "https://media-cdn.tripadvisor.com/media/attractions-splice-spp-720x480/0b/01/a0/79.jpg",
+      "https://cdn.kimkim.com/files/a/images/32bb8a7070464a701063920a92d3b0d912a083bf/original-8c99b6990b5966ef4eff7ea29f295977.jpg"
+    ],
+    "duration": "3 Hours",
+    "location": "Nuwara Eliya, Central Highlands",
+    "maxParticipants": 10,
+    "difficultyLevel": "Easy",
+    "includes": [ "Tea factory tour", "Tea tasting" ],
+    "excludes": [ "Transport", "Personal shopping" ],
+    "meetingPoint": "Pedro Tea Estate Entrance",
+    "cancellationPolicy": "Full refund up to 12 hours before tour.",
+    "externalUrl": "https://example.com/tours/nuwaraeliya",
+    "isActive": true,
+    "createdAt": "2025-01-07T05:15:00Z",
+    "updatedAt": "2025-01-16T09:40:00Z"
+  },
+  {
+    "title": "Bentota River Safari & Mangrove Tour",
+    "code": "SLT-008",
+    "price": 55.00,
+    "description": "Boat safari through mangroves, spotting crocodiles, birds, and river life in Bentota.",
+    "coverImage": "https://media1.thrillophilia.com/filestore/7441do7fvk11ytqe2bexozo6fbwr_shutterstock_1312209746.jpg",
+    "galleryImages": [
+      "https://www.shutterstock.com/image-photo/bentota-beach-southern-province-sri-600nw-2460918065.jpg",
+      "https://treeofliferesort.com/wp-content/uploads/2023/02/Bentota-River-Boat-Safari.jpeg"
+    ],
+    "duration": "2.5 Hours",
+    "location": "Bentota, Western Province",
+    "maxParticipants": 8,
+    "difficultyLevel": "Easy",
+    "includes": [ "Boat safari", "Guide", "Life jackets" ],
+    "excludes": [ "Transport", "Tips" ],
+    "meetingPoint": "Bentota River Jetty",
+    "cancellationPolicy": "Free cancellation up to 24 hours before departure.",
+    "externalUrl": "https://example.com/tours/bentota",
+    "isActive": true,
+    "createdAt": "2025-01-08T06:50:00Z",
+    "updatedAt": "2025-01-17T10:30:00Z"
   }
 ]

@@ -6,6 +6,8 @@
         public string code { get; set; } = string.Empty;
         public decimal price { get; set; }
         public string description { get; set; }
+        public string coverImage { get; set; } = string.Empty;
+        public List<string> galleryImages { get; set; } = new();
         public string? duration { get; set; }
         public string? location { get; set; }
         public int? maxParticipants { get; set; }

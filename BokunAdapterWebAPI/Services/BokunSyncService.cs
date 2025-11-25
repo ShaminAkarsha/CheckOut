@@ -39,8 +39,8 @@ namespace BokunAdapterWebAPI.Services
                 ProductPrice = p.price,
                 ProductDescription = p.description,
                 ProductCategory = "Tours",      // required
-                ProductCoverImage = null,
-                ProductGalleryImages = new List<string>(),                
+                ProductCoverImage = p.coverImage,
+                ProductGalleryImages = p.galleryImages,                
                 AdditionalAttributes = new Dictionary<string, object>
                 {
                     ["adapter_type"] = "bokun",
